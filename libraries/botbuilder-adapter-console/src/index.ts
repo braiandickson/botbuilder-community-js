@@ -1,5 +1,5 @@
 /**
- * @module botbuildercommunity/adapters
+ * @module botbuildercommunity/adapter-console
  */
 
 export * from './consoleAdapter';
