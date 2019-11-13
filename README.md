@@ -62,6 +62,8 @@ The following adapters can be used to expose your bot on additional channels not
 | [@botbuildercommunity/adapter-twilio-whatsapp](libraries/botbuilder-adapter-twilio-whatsapp/README.md) | A platform adapter for Twilio WhatsApp | [Sample](https://github.com/BotBuilderCommunity/botbuilder-community-js/tree/master/samples/adapter-twilio-whatsapp) | [![NPM Version](https://img.shields.io/npm/v/@botbuildercommunity/adapter-twilio-whatsapp.svg)](https://www.npmjs.com/package/@botbuildercommunity/adapter-twilio-whatsapp) |
 | [@botbuildercommunity/adapter-twitter](libraries/botbuilder-adapter-twitter/README.md) | A platform adapter for Twitter | [Sample](https://github.com/BotBuilderCommunity/botbuilder-community-js/tree/master/samples/adapter-twitter) | [![NPM Version](https://img.shields.io/npm/v/@botbuildercommunity/adapter-twitter.svg)](https://www.npmjs.com/package/@botbuildercommunity/adapter-twitter) |
 
+### Botkit
+
 The following packages are available from [Botkit](https://github.com/howdyai/botkit), and work with both the Bot Framework and Botkit:
 
 | Name | Description | NPM |
@@ -71,3 +73,13 @@ The following packages are available from [Botkit](https://github.com/howdyai/bo
 | [botbuilder-adapter-slack](https://github.com/howdyai/botkit/tree/master/packages/botbuilder-adapter-slack#readme) | A platform adapter for Slack | ![NPM Version](https://img.shields.io/npm/v/botbuilder-adapter-slack.svg)
 | [botbuilder-adapter-twilio-sms](https://github.com/howdyai/botkit/tree/master/packages/botbuilder-adapter-twilio-sms#readme) | A platform adapter for Twilio SMS | ![NPM Version](https://img.shields.io/npm/v/botbuilder-adapter-twilio-sms.svg)
 | [botbuilder-adapter-webex](https://github.com/howdyai/botkit/tree/master/packages/botbuilder-adapter-webex#readme) | A platform adapter for Webex Teams| ![NPM Version](https://img.shields.io/npm/v/botbuilder-adapter-webex.svg)
+
+## Data
+
+The following packages enable bots to work faster with external data services.
+
+> Some of these packages are used inside of middleware or dialog components, but are abstracted for greater utility.
+
+| Name | Description | NPM |
+| ---- | ----------- | ------- |
+| [@botbuildercommunity/data-weather-darksky](libraries/botbuilder-data-weather-darksky/README.md) | An abstraction layer for weather data from the Dark Sky API | [![NPM Version](https://img.shields.io/npm/v/@botbuildercommunity/adapter-console.svg)](https://www.npmjs.com/package/@botbuildercommunity/data-weather-darksky) |
