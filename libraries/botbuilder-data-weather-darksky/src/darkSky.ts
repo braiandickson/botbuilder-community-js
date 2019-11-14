@@ -43,4 +43,22 @@ export class DarkSkyForecast {
             visibility: this.forecast.currently.visibility
         };
     }
+    public nextRain() {
+
+    }
+    public nextSnow() {
+
+    }
+    public nextPrecipitation() {
+
+    }
+    public nextBadWeather() {
+
+    }
+    public nextSunnyDay() {
+        
+    }
+    public nextWindyDay() {
+        
+    }
 }
