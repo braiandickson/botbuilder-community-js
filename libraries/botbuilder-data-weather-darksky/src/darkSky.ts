@@ -1,5 +1,5 @@
 import * as request from 'request-promise';
-import { DarkSkySettings, IDarkSkyForecast } from './schema';
+import { DarkSkySettings, IDarkSkyForecast, WeatherForecast } from './schema';
 
 /**
  * @module botbuildercommunity/data-weather-darksky
@@ -24,10 +24,23 @@ import { DarkSkySettings, IDarkSkyForecast } from './schema';
 
 export class DarkSkyForecast {
     private forecast: IDarkSkyForecast;
+    public readonly weather: WeatherForecast;
     public readonly latitude: number;
     public readonly longitude: number;
-    public constructor(data: IDarkSkyForecast) {
+    public constructor(forecast: IDarkSkyForecast) {
+        this.forecast = forecast;
         this.latitude = this.forecast.latitude;
         this.longitude = this.forecast.longitude;
+        this.weather = {
+            temperature: this.forecast.currently.temperature,
+            precipitation: this.forecast.currently.precipProbability,
+            precipitationType: this.forecast.currently.precipType,
+            humidity: this.forecast.currently.humidity,
+            wind: this.forecast.currently.windSpeed,
+            gusts: this.forecast.currently.windGust,
+            direction: this.forecast.currently.windBearing,
+            coverage: this.forecast.currently.cloudCover,
+            visibility: this.forecast.currently.visibility
+        };
     }
 }
