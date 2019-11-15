@@ -7,6 +7,7 @@ export interface DarkSkySettings {
 }
 
 export interface WeatherForecast {
+  summary: string;
   temperature: number;
   precipitation: number;
   precipitationType: string;
@@ -26,7 +27,7 @@ export interface IDarkSkyForecast {
   minutely: IDarkSkyFutureForecast;
   hourly: IDarkSkyFutureForecast;
   daily: IDarkSkyFutureForecast;
-  alerts: IDarkSkyAlerts[];
+  alerts: IDarkSkyAlert[];
   flags: any;
 }
 
@@ -101,7 +102,7 @@ export interface IDarkSkyData {
   apparentTemperatureMaxTime: number;
 }
 
-export interface IDarkSkyAlerts {
+export interface IDarkSkyAlert {
   title: string;
   time: number;
   expires: number;
