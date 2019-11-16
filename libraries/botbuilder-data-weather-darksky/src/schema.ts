@@ -124,3 +124,10 @@ export enum PRECIPITATION {
   SNOW = 'snow',
   RAIN = 'rain'
 }
+
+export enum TIMEFRAME {
+  TODAY = 'currently',
+  MINUTE = 'minutely',
+  HOUR = 'hourly',
+  DAILY = 'daily'
+}

@@ -1,6 +1,6 @@
 import * as request from 'request-promise';
 import spacetime from 'spacetime';
-import { DarkSkySettings, IDarkSkyForecast, WeatherForecast, IDarkSkyAlert, PRECIPITATION, IDarkSkyData, FutureWeatherForecast } from './schema';
+import { DarkSkySettings, IDarkSkyForecast, WeatherForecast, IDarkSkyAlert, PRECIPITATION, IDarkSkyData, FutureWeatherForecast, TIMEFRAME } from './schema';
 
 /**
  * @module botbuildercommunity/data-weather-darksky
@@ -48,71 +48,78 @@ export class DarkSkyForecast {
             visibility: this.forecast.currently.visibility
         };
     }
-    public nextRain(threshold: number = 0.5): FutureWeatherForecast {
-        const rain: IDarkSkyData = this.forecast.daily.data.find((e) => e.precipProbability >= threshold && e.precipType === PRECIPITATION.RAIN);
+    private getFutureWeatherForecast(data: IDarkSkyData): FutureWeatherForecast {
         return {
-            date: spacetime(rain.time).d,
+            date: spacetime(data.time).d,
             weather: {
-                summary: rain.summary,
-                temperatureHigh: rain.temperatureHigh,
-                temperatureLow: rain.temperatureLow,
-                precipitation: rain.precipProbability,
-                precipitationType: rain.precipType,
-                humidity: rain.humidity,
-                wind: rain.windSpeed,
-                gusts: rain.windGust,
-                direction: rain.windBearing,
-                coverage: rain.cloudCover,
-                visibility: rain.visibility
+                summary: data.summary,
+                temperatureHigh: data.temperatureHigh,
+                temperatureLow: data.temperatureLow,
+                precipitation: data.precipProbability,
+                precipitationType: data.precipType,
+                humidity: data.humidity,
+                wind: data.windSpeed,
+                gusts: data.windGust,
+                direction: data.windBearing,
+                coverage: data.cloudCover,
+                visibility: data.visibility
             }
         };
+    }
+    /*
+     * Need to take into account hourly when the day is the current day.
+     * Need to take into account minute when the hour is the current hour.
+     */
+    public nextRain(threshold: number = 0.5): FutureWeatherForecast {
+        const rain: IDarkSkyData = this.forecast.daily.data.find((e) => e.precipProbability >= threshold && e.precipType === PRECIPITATION.RAIN);
+        return this.getFutureWeatherForecast(rain);
     }
     public nextSnow(threshold: number = 0.5): FutureWeatherForecast {
         const snow: IDarkSkyData = this.forecast.daily.data.find((e) => e.precipProbability >= threshold && e.precipType === PRECIPITATION.SNOW);
-        return {
-            date: spacetime(snow.time).d,
-            weather: {
-                summary: snow.summary,
-                temperatureHigh: snow.temperatureHigh,
-                temperatureLow: snow.temperatureLow,
-                precipitation: snow.precipProbability,
-                precipitationType: snow.precipType,
-                humidity: snow.humidity,
-                wind: snow.windSpeed,
-                gusts: snow.windGust,
-                direction: snow.windBearing,
-                coverage: snow.cloudCover,
-                visibility: snow.visibility
-            }
-        };
+        return this.getFutureWeatherForecast(snow);
     }
     public nextPrecipitation(threshold: number = 0.5): FutureWeatherForecast {
         const prec: IDarkSkyData = this.forecast.daily.data.find((e) => e.precipProbability >= threshold);
-        return {
-            date: spacetime(prec.time).d,
-            weather: {
-                summary: prec.summary,
-                temperatureHigh: prec.temperatureHigh,
-                temperatureLow: prec.temperatureLow,
-                precipitation: prec.precipProbability,
-                precipitationType: prec.precipType,
-                humidity: prec.humidity,
-                wind: prec.windSpeed,
-                gusts: prec.windGust,
-                direction: prec.windBearing,
-                coverage: prec.cloudCover,
-                visibility: prec.visibility
-            }
-        };
+        return this.getFutureWeatherForecast(prec);
     }
-    public nextBadWeather() {
+    public nextHighHumidity(threshold: number = 0.5): FutureWeatherForecast {
 
     }
-    public nextSunnyDay() {
+    public nextLowVisibility(threshold: number = 0.5): FutureWeatherForecast {
+
+    }
+    public nextBadWeather(threshold: number = 0.5): FutureWeatherForecast {
+
+    }
+    public nextSunnyWeather(threshold: number = 0.5): FutureWeatherForecast {
         
     }
-    public nextWindyDay() {
+    public nextWindyWeather(threshold: number = 0.5): FutureWeatherForecast {
         
+    }
+    public hottest(timeframe: TIMEFRAME = TIMEFRAME.TODAY): FutureWeatherForecast {
+
+    }
+    public coldest(timeframe: TIMEFRAME = TIMEFRAME.TODAY): FutureWeatherForecast {
+
+    }
+    public wettest(timeframe: TIMEFRAME = TIMEFRAME.TODAY): FutureWeatherForecast {
+
+    }
+    public driest(timeframe: TIMEFRAME = TIMEFRAME.TODAY): FutureWeatherForecast {
+
+    }
+    public sunniest(timeframe: TIMEFRAME = TIMEFRAME.TODAY): FutureWeatherForecast {
+
+    }
+    public cloudiest(timeframe: TIMEFRAME = TIMEFRAME.TODAY): FutureWeatherForecast {
+
+    }
+    public windiest(timeframe: TIMEFRAME = TIMEFRAME.TODAY): FutureWeatherForecast {
+
+    }
+    public humidest(timeframe: TIMEFRAME = TIMEFRAME.TODAY): FutureWeatherForecast {
+
     }
     public getCurrentSummary(): string {
         return this.forecast.currently.summary;
