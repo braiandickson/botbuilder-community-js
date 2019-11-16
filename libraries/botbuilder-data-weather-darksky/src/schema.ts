@@ -8,7 +8,9 @@ export interface DarkSkySettings {
 
 export interface WeatherForecast {
   summary: string;
-  temperature: number;
+  temperature?: number;
+  temperatureHigh?: number;
+  temperatureLow?: number;
   precipitation: number;
   precipitationType: string;
   humidity: number;
@@ -17,6 +19,11 @@ export interface WeatherForecast {
   direction: number;
   coverage: number;
   visibility: number;
+}
+
+export interface FutureWeatherForecast {
+  date: Date;
+  weather: WeatherForecast;
 }
 
 export interface IDarkSkyForecast {
@@ -108,4 +115,12 @@ export interface IDarkSkyAlert {
   expires: number;
   description: string;
   uri: string;
+}
+
+/*
+ * Need to get the rest
+ */
+export enum PRECIPITATION {
+  SNOW = 'snow',
+  RAIN = 'rain'
 }
