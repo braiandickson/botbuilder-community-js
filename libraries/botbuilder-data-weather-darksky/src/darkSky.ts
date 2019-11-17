@@ -83,19 +83,28 @@ export class DarkSkyForecast {
         return this.getFutureWeatherForecast(prec);
     }
     public nextHighHumidity(threshold: number = 0.5): FutureWeatherForecast {
-
+        const prec: IDarkSkyData = this.forecast.daily.data.find((e) => e.humidity >= threshold);
+        return this.getFutureWeatherForecast(prec);
     }
     public nextLowVisibility(threshold: number = 0.5): FutureWeatherForecast {
-
+        const prec: IDarkSkyData = this.forecast.daily.data.find((e) => e.visibility <= threshold);
+        return this.getFutureWeatherForecast(prec);
     }
-    public nextBadWeather(threshold: number = 0.5): FutureWeatherForecast {
-
+    public nextBadWeather(precipThreshold: number = 0.5, clarityThreshold: number = 0.5, windThreshold: number = 10): FutureWeatherForecast {
+        const prec: IDarkSkyData = this.forecast.daily.data.find((e) => {
+            return e.precipProbability >= precipThreshold
+                && e.visibility <= clarityThreshold
+                && e.windSpeed >= windThreshold;
+        });
+        return this.getFutureWeatherForecast(prec);
     }
-    public nextSunnyWeather(threshold: number = 0.5): FutureWeatherForecast {
-        
+    public nextSunnyWeather(threshold: number = 75): FutureWeatherForecast {
+        const prec: IDarkSkyData = this.forecast.daily.data.find((e) => e.visibility >= threshold);
+        return this.getFutureWeatherForecast(prec);
     }
-    public nextWindyWeather(threshold: number = 0.5): FutureWeatherForecast {
-        
+    public nextWindyWeather(threshold: number = 10): FutureWeatherForecast {
+        const prec: IDarkSkyData = this.forecast.daily.data.find((e) => e.windSpeed >= threshold);
+        return this.getFutureWeatherForecast(prec);
     }
     public hottest(timeframe: TIMEFRAME = TIMEFRAME.TODAY): FutureWeatherForecast {
 
