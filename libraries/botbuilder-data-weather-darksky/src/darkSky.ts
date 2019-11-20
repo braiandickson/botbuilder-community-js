@@ -6,17 +6,6 @@ import { DarkSkySettings, IDarkSkyForecast, WeatherForecast, IDarkSkyAlert, PREC
  * @module botbuildercommunity/data-weather-darksky
  */
 
-async function getDarkSkyForecast(latitude: number, longitude: number, settings: DarkSkySettings): Promise<DarkSkyForecast> {
-    const opts = {
-        uri: `https://api.darksky.net/forecast/${settings.key}/${latitude},${longitude}`,
-        method: 'GET',
-        resolveWithFullResponse: true
-    }
-    const res = await request(opts);
-    const data: IDarkSkyForecast = res.body;
-    return new DarkSkyForecast(data);
-}
-
 export class DarkSkyClient {
     private settings: DarkSkySettings;
     public constructor(settings: DarkSkySettings) {
@@ -213,10 +202,21 @@ export class DarkSkyForecast {
     }
     public getAlert(alert?: IDarkSkyAlert): string {
         const warning = alert || this.forecast.alerts[0];
-        return `Warning (expires on ${warning.expires}): ${warning.description}`;
+        return `Warning (expires on ${ warning.expires }): ${ warning.description }`;
     }
     public getAlerts(): string[] {
         const alerts: IDarkSkyAlert[] = this.forecast.alerts;
-        return alerts.map((e: IDarkSkyAlert) => this.getAlert(e));
+        return alerts.map((e: IDarkSkyAlert): string => this.getAlert(e));
     }
+}
+
+async function getDarkSkyForecast(latitude: number, longitude: number, settings: DarkSkySettings): Promise<DarkSkyForecast> {
+    const opts = {
+        uri: `https://api.darksky.net/forecast/${ settings.key }/${ latitude },${ longitude }`,
+        method: 'GET',
+        resolveWithFullResponse: true
+    };
+    const res = await request(opts);
+    const data: IDarkSkyForecast = res.body;
+    return new DarkSkyForecast(data);
 }
