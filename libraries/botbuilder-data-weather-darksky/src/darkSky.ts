@@ -6,19 +6,6 @@ import { DarkSkySettings, IDarkSkyForecast, WeatherForecast, IDarkSkyAlert, PREC
  * @module botbuildercommunity/data-weather-darksky
  */
 
-export class DarkSkyClient {
-    private settings: DarkSkySettings;
-    public constructor(settings: DarkSkySettings) {
-        this.settings = settings;
-    }
-    private async getDarkSkyForecast(latitude: number, longitude: number): Promise<DarkSkyForecast> {
-        return await getDarkSkyForecast(latitude, longitude, this.settings);
-    }
-    public async getForecast(latitude: number, longitude: number): Promise<DarkSkyForecast> {
-        return this.getDarkSkyForecast(latitude, longitude);
-    }
-}
-
 export class DarkSkyForecast {
     private forecast: IDarkSkyForecast;
     public readonly weather: WeatherForecast;
@@ -219,4 +206,17 @@ async function getDarkSkyForecast(latitude: number, longitude: number, settings:
     const res = await request(opts);
     const data: IDarkSkyForecast = res.body;
     return new DarkSkyForecast(data);
+}
+
+export class DarkSkyClient {
+    private settings: DarkSkySettings;
+    public constructor(settings: DarkSkySettings) {
+        this.settings = settings;
+    }
+    private async getDarkSkyForecast(latitude: number, longitude: number): Promise<DarkSkyForecast> {
+        return await getDarkSkyForecast(latitude, longitude, this.settings);
+    }
+    public async getForecast(latitude: number, longitude: number): Promise<DarkSkyForecast> {
+        return await this.getDarkSkyForecast(latitude, longitude);
+    }
 }

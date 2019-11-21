@@ -9,7 +9,7 @@ const settings = {
 };
 
 const getDarkSkyForecast = async function(latitude, longitude, settings) {
-    return Promise.resolve(new DarkSkyForecast(data));
+    return await Promise.resolve(new DarkSkyForecast(data));
 }
 
 darksky.__set__("getDarkSkyForecast", getDarkSkyForecast);
