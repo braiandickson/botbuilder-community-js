@@ -1,6 +1,6 @@
 import * as request from 'request-promise';
-import spacetime from 'spacetime';
 import { DarkSkySettings, IDarkSkyForecast, WeatherForecast, IDarkSkyAlert, PRECIPITATION, IDarkSkyData, FutureWeatherForecast, TIMEFRAME, IDarkSkyFutureForecast } from './schema';
+const spacetime = require('spacetime');
 
 /**
  * @module botbuildercommunity/data-weather-darksky
@@ -29,22 +29,25 @@ export class DarkSkyForecast {
         };
     }
     private getFutureWeatherForecast(data: IDarkSkyData): FutureWeatherForecast {
-        return {
-            date: spacetime(data.time).d,
-            weather: {
-                summary: data.summary,
-                temperatureHigh: data.temperatureHigh,
-                temperatureLow: data.temperatureLow,
-                precipitation: data.precipProbability,
-                precipitationType: data.precipType,
-                humidity: data.humidity,
-                wind: data.windSpeed,
-                gusts: data.windGust,
-                direction: data.windBearing,
-                coverage: data.cloudCover,
-                visibility: data.visibility
-            }
-        };
+        if(data != null) {
+            return {
+                date: spacetime(data.time).d,
+                weather: {
+                    summary: data.summary,
+                    temperatureHigh: data.temperatureHigh,
+                    temperatureLow: data.temperatureLow,
+                    precipitation: data.precipProbability,
+                    precipitationType: data.precipType,
+                    humidity: data.humidity,
+                    wind: data.windSpeed,
+                    gusts: data.windGust,
+                    direction: data.windBearing,
+                    coverage: data.cloudCover,
+                    visibility: data.visibility
+                }
+            };
+        }
+        return null;
     }
     private getTimeframeForecast(timeframe: string): IDarkSkyFutureForecast {
         const fore: IDarkSkyForecast = this.forecast;

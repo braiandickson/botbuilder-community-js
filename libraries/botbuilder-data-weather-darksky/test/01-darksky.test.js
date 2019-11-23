@@ -9,7 +9,7 @@ const settings = {
 };
 
 const getDarkSkyForecast = async function(latitude, longitude, settings) {
-    return await Promise.resolve(new DarkSkyForecast(data));
+    return await Promise.resolve(new darksky.DarkSkyForecast(data));
 }
 
 darksky.__set__("getDarkSkyForecast", getDarkSkyForecast);
@@ -21,17 +21,17 @@ describe('Tests for the DarkSkyClient', () => {
     });
     it('should create the forecast from the client', async () => {
         const client = new darksky.DarkSkyClient(settings);
-        const forecast = await client.getForecast(1, 1);
-        assert.notEqual(forecast, null);
-        assert.equal(forecast.timezone, 'America/Los_Angeles');
+        const f = await client.getForecast(1, 1);
+        assert.notEqual(f.forecast, null);
+        assert.equal(f.forecast.timezone, 'America/Los_Angeles');
     });
 });
 
 describe('Tests for the DarkSkyForecast', () => {
     it('should create a forecast', () => {
-        const forecast = new darksky.DarkSkyForecast(data);
-        assert.notEqual(forecast, null);
-        assert.equal(forecast.timezone, 'America/Los_Angeles');
+        const f = new darksky.DarkSkyForecast(data);
+        assert.notEqual(f, null);
+        assert.equal(f.forecast.timezone, 'America/Los_Angeles');
     });
 });
 
@@ -55,5 +55,21 @@ describe('Tests for the DarkSkyForecast methods', () => {
         assert.equal(forecast.weather.direction, 340);
         assert.equal(forecast.weather.coverage, 0);
         assert.equal(forecast.weather.visibility, 7.578);
+    });
+    it('should not return any day', () => {
+        const result = forecast.nextRain();
+        assert.equal(result, null)
+    });
+    it('should return the next rainy day', () => {
+        const result = forecast.nextRain(0.01);
+        assert.equal(result.weather.precipitation, 0.06);
+    });
+    it('should return the next snowy day', () => {
+        const result = forecast.nextSnow(0.01);
+        assert.equal(result, null);
+    });
+    it('should return the next day with precipitation', () => {
+        const result = forecast.nextPrecipitation(0.01);
+        assert.equal(result.weather.precipitation, 0.06);
     });
 });
