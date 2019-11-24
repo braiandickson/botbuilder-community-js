@@ -80,13 +80,13 @@ export class DarkSkyForecast {
     public nextBadWeather(precipThreshold: number = 0.5, clarityThreshold: number = 0.5, windThreshold: number = 10): FutureWeatherForecast {
         const fore: IDarkSkyData = this.forecast.daily.data.find((e: IDarkSkyData): boolean => {
             return e.precipProbability >= precipThreshold
-                && e.visibility <= clarityThreshold
-                && e.windSpeed >= windThreshold;
+                || e.visibility <= clarityThreshold
+                || e.windSpeed >= windThreshold;
         });
         return this.getFutureWeatherForecast(fore);
     }
-    public nextSunnyWeather(threshold: number = 75): FutureWeatherForecast {
-        const fore: IDarkSkyData = this.forecast.daily.data.find((e: IDarkSkyData): boolean => e.visibility >= threshold);
+    public nextSunnyWeather(threshold: number = 0.5): FutureWeatherForecast {
+        const fore: IDarkSkyData = this.forecast.daily.data.find((e: IDarkSkyData): boolean => e.cloudCover <= threshold);
         return this.getFutureWeatherForecast(fore);
     }
     public nextWindyWeather(threshold: number = 10): FutureWeatherForecast {

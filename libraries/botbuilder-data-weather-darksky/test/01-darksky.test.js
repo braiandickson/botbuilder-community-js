@@ -72,4 +72,25 @@ describe('Tests for the DarkSkyForecast methods', () => {
         const result = forecast.nextPrecipitation(0.01);
         assert.equal(result.weather.precipitation, 0.06);
     });
+    it('should return the next humid day', () => {
+        const result = forecast.nextHighHumidity(0.5);
+        assert.equal(result.weather.humidity, 0.79);
+    });
+    it('should return the next low visibility day', () => {
+        const result = forecast.nextLowVisibility(10);
+        assert.equal(result.weather.visibility, 9.242);
+    });
+    it('should return the next day with bad weather', () => {
+        const result = forecast.nextBadWeather();
+        assert.notEqual(result.weather, null);
+    });
+    it('should return the next day with good weather', () => {
+        const result = forecast.nextSunnyWeather();
+        console.log(result);
+        assert.equal(result.weather.coverage, 0.14);
+    });
+    it('should return the next windy day', () => {
+        const result = forecast.nextWindyWeather(7);
+        assert.equal(result.weather.wind, 11.71);
+    });
 });
