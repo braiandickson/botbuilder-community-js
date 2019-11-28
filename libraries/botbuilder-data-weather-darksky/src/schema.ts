@@ -126,7 +126,6 @@ export enum PRECIPITATION {
 }
 
 export enum TIMEFRAME {
-    TODAY = 'currently',
     MINUTE = 'minutely',
     HOUR = 'hourly',
     DAILY = 'daily'

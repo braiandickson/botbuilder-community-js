@@ -93,73 +93,73 @@ export class DarkSkyForecast {
         const fore: IDarkSkyData = this.forecast.daily.data.find((e: IDarkSkyData): boolean => e.windSpeed >= threshold);
         return this.getFutureWeatherForecast(fore);
     }
-    public hottest(timeframe: TIMEFRAME = TIMEFRAME.TODAY): FutureWeatherForecast {
+    public hottest(timeframe: TIMEFRAME = TIMEFRAME.DAILY): FutureWeatherForecast {
         const fore = this.getTimeframeForecast(timeframe);
         const high: number = Math.max(...fore.data.map((e: IDarkSkyData): number => e.temperatureHigh));
         const result: IDarkSkyData = fore.data.find((e: IDarkSkyData): boolean => e.temperatureHigh === high);
         return this.getFutureWeatherForecast(result);
     }
-    public coldest(timeframe: TIMEFRAME = TIMEFRAME.TODAY): FutureWeatherForecast {
+    public coldest(timeframe: TIMEFRAME = TIMEFRAME.DAILY): FutureWeatherForecast {
         const fore = this.getTimeframeForecast(timeframe);
         const low: number = Math.min(...fore.data.map((e: IDarkSkyData): number => e.temperatureLow));
         const result: IDarkSkyData = fore.data.find((e: IDarkSkyData): boolean => e.temperatureLow === low);
         return this.getFutureWeatherForecast(result);
     }
-    public wettest(timeframe: TIMEFRAME = TIMEFRAME.TODAY): FutureWeatherForecast {
+    public wettest(timeframe: TIMEFRAME = TIMEFRAME.DAILY): FutureWeatherForecast {
         const fore = this.getTimeframeForecast(timeframe);
         const high: number = Math.max(...fore.data.map((e: IDarkSkyData): number => e.precipProbability));
         const result: IDarkSkyData = fore.data.find((e: IDarkSkyData): boolean => e.precipProbability === high);
         return this.getFutureWeatherForecast(result);
     }
-    public driest(timeframe: TIMEFRAME = TIMEFRAME.TODAY): FutureWeatherForecast {
+    public driest(timeframe: TIMEFRAME = TIMEFRAME.DAILY): FutureWeatherForecast {
         const fore = this.getTimeframeForecast(timeframe);
         const low: number = Math.min(...fore.data.map((e: IDarkSkyData): number => e.precipProbability));
         const result: IDarkSkyData = fore.data.find((e: IDarkSkyData): boolean => e.precipProbability === low);
         return this.getFutureWeatherForecast(result);
     }
-    public hardest(timeframe: TIMEFRAME = TIMEFRAME.TODAY): FutureWeatherForecast {
+    public hardest(timeframe: TIMEFRAME = TIMEFRAME.DAILY): FutureWeatherForecast {
         const fore = this.getTimeframeForecast(timeframe);
         const high: number = Math.max(...fore.data.map((e: IDarkSkyData): number => e.precipIntensityMax));
         const result: IDarkSkyData = fore.data.find((e: IDarkSkyData): boolean => e.precipIntensityMax === high);
         return this.getFutureWeatherForecast(result);
     }
-    public lightest(timeframe: TIMEFRAME = TIMEFRAME.TODAY): FutureWeatherForecast {
+    public lightest(timeframe: TIMEFRAME = TIMEFRAME.DAILY): FutureWeatherForecast {
         const fore = this.getTimeframeForecast(timeframe);
         const low: number = Math.min(...fore.data.map((e: IDarkSkyData): number => e.precipIntensityMax));
         const result: IDarkSkyData = fore.data.find((e: IDarkSkyData): boolean => e.precipIntensityMax === low);
         return this.getFutureWeatherForecast(result);
     }
-    public sunniest(timeframe: TIMEFRAME = TIMEFRAME.TODAY): FutureWeatherForecast {
+    public sunniest(timeframe: TIMEFRAME = TIMEFRAME.DAILY): FutureWeatherForecast {
         const fore = this.getTimeframeForecast(timeframe);
-        const high: number = Math.max(...fore.data.map((e: IDarkSkyData): number => e.visibility));
-        const result: IDarkSkyData = fore.data.find((e: IDarkSkyData): boolean => e.visibility === high);
+        const low: number = Math.min(...fore.data.map((e: IDarkSkyData): number => e.cloudCover));
+        const result: IDarkSkyData = fore.data.find((e: IDarkSkyData): boolean => e.cloudCover === low);
         return this.getFutureWeatherForecast(result);
     }
-    public cloudiest(timeframe: TIMEFRAME = TIMEFRAME.TODAY): FutureWeatherForecast {
+    public cloudiest(timeframe: TIMEFRAME = TIMEFRAME.DAILY): FutureWeatherForecast {
         const fore = this.getTimeframeForecast(timeframe);
-        const low: number = Math.min(...fore.data.map((e: IDarkSkyData): number => e.visibility));
-        const result: IDarkSkyData = fore.data.find((e: IDarkSkyData): boolean => e.visibility === low);
+        const high: number = Math.max(...fore.data.map((e: IDarkSkyData): number => e.cloudCover));
+        const result: IDarkSkyData = fore.data.find((e: IDarkSkyData): boolean => e.cloudCover === high);
         return this.getFutureWeatherForecast(result);
     }
-    public windiest(timeframe: TIMEFRAME = TIMEFRAME.TODAY): FutureWeatherForecast {
+    public windiest(timeframe: TIMEFRAME = TIMEFRAME.DAILY): FutureWeatherForecast {
         const fore = this.getTimeframeForecast(timeframe);
         const high: number = Math.max(...fore.data.map((e: IDarkSkyData): number => e.windSpeed));
         const result: IDarkSkyData = fore.data.find((e: IDarkSkyData): boolean => e.windSpeed === high);
         return this.getFutureWeatherForecast(result);
     }
-    public calmest(timeframe: TIMEFRAME = TIMEFRAME.TODAY): FutureWeatherForecast {
+    public calmest(timeframe: TIMEFRAME = TIMEFRAME.DAILY): FutureWeatherForecast {
         const fore = this.getTimeframeForecast(timeframe);
         const low: number = Math.min(...fore.data.map((e: IDarkSkyData): number => e.windSpeed));
         const result: IDarkSkyData = fore.data.find((e: IDarkSkyData): boolean => e.windSpeed === low);
         return this.getFutureWeatherForecast(result);
     }
-    public humidest(timeframe: TIMEFRAME = TIMEFRAME.TODAY): FutureWeatherForecast {
+    public humidest(timeframe: TIMEFRAME = TIMEFRAME.DAILY): FutureWeatherForecast {
         const fore = this.getTimeframeForecast(timeframe);
         const high: number = Math.max(...fore.data.map((e: IDarkSkyData): number => e.humidity));
         const result: IDarkSkyData = fore.data.find((e: IDarkSkyData): boolean => e.humidity === high);
         return this.getFutureWeatherForecast(result);
     }
-    public aridest(timeframe: TIMEFRAME = TIMEFRAME.TODAY): FutureWeatherForecast {
+    public aridest(timeframe: TIMEFRAME = TIMEFRAME.DAILY): FutureWeatherForecast {
         const fore = this.getTimeframeForecast(timeframe);
         const low: number = Math.min(...fore.data.map((e: IDarkSkyData): number => e.humidity));
         const result: IDarkSkyData = fore.data.find((e: IDarkSkyData): boolean => e.humidity === low);
@@ -169,34 +169,29 @@ export class DarkSkyForecast {
         return this.forecast.currently.summary;
     }
     public getTodaysSummary(): string {
-        return this.forecast.daily[0].summary;
-
+        return this.forecast.daily.summary;
     }
     public getCurrentForecast(): WeatherForecast {
         return this.weather;
     }
-    public getTodaysForecast(): WeatherForecast {
-        return {
-            summary: this.forecast.daily[0].summary,
-            temperature: this.forecast.daily[0].temperature,
-            precipitation: this.forecast.daily[0].precipProbability,
-            precipitationType: this.forecast.daily[0].precipType,
-            humidity: this.forecast.daily[0].humidity,
-            wind: this.forecast.daily[0].windSpeed,
-            gusts: this.forecast.daily[0].windGust,
-            direction: this.forecast.daily[0].windBearing,
-            coverage: this.forecast.daily[0].cloudCover,
-            visibility: this.forecast.daily[0].visibility
-        };
-
+    public getTodaysForecast(): FutureWeatherForecast {
+        return this.getFutureWeatherForecast(this.forecast.daily.data[0]);
     }
     public getAlert(alert?: IDarkSkyAlert): string {
-        const warning = alert || this.forecast.alerts[0];
-        return `Warning (expires on ${ warning.expires }): ${ warning.description }`;
+        try {
+            const warning = alert || this.forecast.alerts[0];
+            return `Warning (expires on ${ warning.expires }): ${ warning.description }`;
+        }
+        catch(e) {
+            return 'No weather alerts for this time period.'
+        }
     }
     public getAlerts(): string[] {
         const alerts: IDarkSkyAlert[] = this.forecast.alerts;
-        return alerts.map((e: IDarkSkyAlert): string => this.getAlert(e));
+        if(alerts !== undefined) {
+            return alerts.map((e: IDarkSkyAlert): string => this.getAlert(e));
+        }
+        return null;
     }
 }
 
