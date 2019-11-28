@@ -82,4 +82,5 @@ The following packages enable bots to work faster with external data services.
 
 | Name | Description | NPM |
 | ---- | ----------- | ------- |
-| [@botbuildercommunity/data-weather-darksky](libraries/botbuilder-data-weather-darksky/README.md) | An abstraction layer for weather data from the Dark Sky API | [![NPM Version](https://img.shields.io/npm/v/@botbuildercommunity/adapter-console.svg)](https://www.npmjs.com/package/@botbuildercommunity/data-weather-darksky) |
+| [@botbuildercommunity/data-location-uscensus](libraries/botbuilder-data-location-uscensus/README.md) | An abstraction layer for location data from the US Census API | [![NPM Version](https://img.shields.io/npm/v/@botbuildercommunity/data-location-uscensus.svg)](https://www.npmjs.com/package/@botbuildercommunity/data-location-uscensus) |
+| [@botbuildercommunity/data-weather-darksky](libraries/botbuilder-data-weather-darksky/README.md) | An abstraction layer for weather data from the Dark Sky API | [![NPM Version](https://img.shields.io/npm/v/@botbuildercommunity/data-weather-darksky.svg)](https://www.npmjs.com/package/@botbuildercommunity/data-weather-darksky) |
