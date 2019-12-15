@@ -18,18 +18,53 @@ export enum FORMAT {
     HTML = 'html'
 }
 
-export interface IUSCensusSettings {
+export interface SingleLineAddress {
+    address: string;
+}
+
+export interface Address {
+    street: string;
+    city: string;
+    state: string;
+    zip: string;
+}
+
+export interface Coordinates {
+    x: number;
+    y: number;
+}
+
+export interface USCensusSettings {
     returntype: RETURNTYPE;
-    searchtype: SEARCHTYPE;
     benchmark: number | string;
     vintage?: number | string;
-    address?: string;
-    street?: string;
-    city?: string;
-    state?: string;
-    zip?: string;
-    x?: number;
-    y?: number;
     format?: FORMAT;
     layers?: any;
+}
+
+export interface TigerLine {
+    tigerLineId: number;
+    side: string;
+}
+
+export interface AddressComponents {
+    fromAddress: number;
+    toAddress: number;
+    preQualifier?: string;
+    preDirection?: string;
+    preType?: string;
+    streetName: string;
+    suffixType: string;
+    suffixDirection?: string;
+    suffixQualifier?: string;
+    city: string;
+    state: string;
+    zip: number;
+}
+
+export interface AddressMatch {
+    matchedAddress: string;
+    coordinates: Coordinates;
+    tigerLine: TigerLine;
+    addressComponents: AddressComponents;
 }

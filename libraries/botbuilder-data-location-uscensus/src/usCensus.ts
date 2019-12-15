@@ -1,27 +1,44 @@
 import { stringify } from 'qs';
-import { IUSCensusSettings, FORMAT, SEARCHTYPE, RETURNTYPE } from './schema';
+import * as request from 'request-promise';
+import { USCensusSettings, SingleLineAddress, Address, Coordinates, AddressMatch, FORMAT, SEARCHTYPE, RETURNTYPE } from './schema';
 
 /**
  * @module botbuildercommunity/data-location-uscensus
  */
 
 export class USCensusLocation {
-    private readonly url: string;
-    private readonly settings: IUSCensusSettings;
-    private readonly searchType: SEARCHTYPE = SEARCHTYPE.ONELINEADDRESS;
-    private readonly returnType: RETURNTYPE = RETURNTYPE.LOCATIONS;
-    private readonly paramsString: string;
-    public constructor(settings: IUSCensusSettings) {
+    private settings: USCensusSettings;
+    private returnType: RETURNTYPE = RETURNTYPE.LOCATIONS;
+    public constructor(settings: USCensusSettings) {
+        this.parseSettings(settings);
+    }
+    private parseSettings(settings: USCensusSettings): void {
         this.settings = { ...{ benchmark: 'Public_AR_Current', format: FORMAT.JSON }, ...settings};
-        if(this.settings.searchtype) {
-            this.searchType = this.settings.searchtype;
-            delete this.settings.searchtype;
-        }
         if(this.settings.returntype) {
             this.returnType = this.settings.returntype;
             delete this.settings.returntype;
         }
-        this.paramsString = stringify(this.settings);
-        this.url = `https://geocoding.geo.census.gov/geocoder/${this.returnType}/${this.searchType}?${this.paramsString}`
+    }
+    private async getLocationData(searchType: SEARCHTYPE, params: any): Promise<AddressMatch> {
+        const opts = {
+            uri: `https://geocoding.geo.census.gov/geocoder/${this.returnType}/${searchType}?${stringify(params)}`,
+            method: 'GET',
+            resolveWithFullResponse: true
+        };
+        const res: request.RequestPromise = await request(opts);
+        const data: any = JSON.parse(res.body as string);
+        if(data != null && data.result != null && data.result.addressMatches != null) {
+            return data.result.addressMatches[0];
+        }
+        return null;
+    }
+    public async byAddress(parts: Address): Promise<AddressMatch> {
+        return await this.getLocationData(SEARCHTYPE.ADDRESS, parts);
+    }
+    public async bySingleLineAddress(address: SingleLineAddress): Promise<AddressMatch> {
+        return await this.getLocationData(SEARCHTYPE.ADDRESS, address);
+    }
+    public async byCoordinations(coordinates: Coordinates): Promise<AddressMatch> {
+        return await this.getLocationData(SEARCHTYPE.COORDINATES, coordinates);
     }
 }
