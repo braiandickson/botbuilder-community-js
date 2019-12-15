@@ -38,7 +38,7 @@ export class USCensusLocation {
     public async bySingleLineAddress(address: SingleLineAddress): Promise<AddressMatch> {
         return await this.getLocationData(SEARCHTYPE.ADDRESS, address);
     }
-    public async byCoordinations(coordinates: Coordinates): Promise<AddressMatch> {
+    public async byCoordinates(coordinates: Coordinates): Promise<AddressMatch> {
         return await this.getLocationData(SEARCHTYPE.COORDINATES, coordinates);
     }
 }
