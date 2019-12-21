@@ -53,13 +53,17 @@ export interface AddressComponents {
     preQualifier?: string;
     preDirection?: string;
     preType?: string;
+    streetNumber?: string;
     streetName: string;
-    suffixType: string;
+    suffixType?: string;
     suffixDirection?: string;
     suffixQualifier?: string;
+    town?: string;
     city: string;
+    county?: string;
     state: string;
-    zip: number;
+    zip: string | number;
+    country?: string;
 }
 
 export interface AddressMatch {
@@ -67,4 +71,5 @@ export interface AddressMatch {
     coordinates: Coordinates;
     tigerLine: TigerLine;
     addressComponents: AddressComponents;
+    other?: any;
 }

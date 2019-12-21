@@ -21,7 +21,7 @@ export class USCensusLocation {
     }
     private async getLocationData(searchType: SEARCHTYPE, params: SingleLineAddress | Address | Coordinates): Promise<AddressMatch> {
         const opts = {
-            uri: `https://geocoding.geo.census.gov/geocoder/${this.returnType}/${searchType}?${stringify(params)}`,
+            uri: `https://geocoding.geo.census.gov/geocoder/${ this.returnType }/${ searchType }?${ stringify(params) }`,
             method: 'GET',
             resolveWithFullResponse: true
         };

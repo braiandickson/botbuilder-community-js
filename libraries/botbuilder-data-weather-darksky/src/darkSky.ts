@@ -1,5 +1,6 @@
 import * as request from 'request-promise';
 import { DarkSkySettings, IDarkSkyForecast, WeatherForecast, IDarkSkyAlert, PRECIPITATION, IDarkSkyData, FutureWeatherForecast, TIMEFRAME, IDarkSkyFutureForecast } from './schema';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const spacetime = require('spacetime');
 
 /**
@@ -183,7 +184,7 @@ export class DarkSkyForecast {
             return `Warning (expires on ${ warning.expires }): ${ warning.description }`;
         }
         catch(e) {
-            return 'No weather alerts for this time period.'
+            return 'No weather alerts for this time period.';
         }
     }
     public getAlerts(): string[] {
