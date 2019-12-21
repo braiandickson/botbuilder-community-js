@@ -19,7 +19,7 @@ export class USCensusLocation {
             delete this.settings.returntype;
         }
     }
-    private async getLocationData(searchType: SEARCHTYPE, params: any): Promise<AddressMatch> {
+    private async getLocationData(searchType: SEARCHTYPE, params: SingleLineAddress | Address | Coordinates): Promise<AddressMatch> {
         const opts = {
             uri: `https://geocoding.geo.census.gov/geocoder/${this.returnType}/${searchType}?${stringify(params)}`,
             method: 'GET',
@@ -36,7 +36,7 @@ export class USCensusLocation {
         return await this.getLocationData(SEARCHTYPE.ADDRESS, parts);
     }
     public async bySingleLineAddress(address: SingleLineAddress): Promise<AddressMatch> {
-        return await this.getLocationData(SEARCHTYPE.ADDRESS, address);
+        return await this.getLocationData(SEARCHTYPE.ONELINEADDRESS, address);
     }
     public async byCoordinates(coordinates: Coordinates): Promise<AddressMatch> {
         return await this.getLocationData(SEARCHTYPE.COORDINATES, coordinates);
