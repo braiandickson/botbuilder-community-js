@@ -2,6 +2,11 @@
  * @module botbuildercommunity/data-location-bing
  */
 
+type inclnb = 0 | 1;
+
 export interface BingSettings {
-    apiKey: string;
+    key: string;
+    includeNeighborhood?: inclnb;
+    include?: string;
+    maxResults?: number;
 }
