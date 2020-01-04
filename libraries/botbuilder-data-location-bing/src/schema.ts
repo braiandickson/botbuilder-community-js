@@ -9,6 +9,7 @@ export interface BingSettings {
     includeNeighborhood?: inclnb;
     include?: string;
     maxResults?: number;
+    o?: FORMAT
 }
 
 export enum FORMAT {
