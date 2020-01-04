@@ -2,7 +2,6 @@ import { stringify } from 'qs';
 import * as request from 'request-promise';
 import { BingSettings } from './schema';
 
-
 /**
  * @module botbuildercommunity/data-location-bing
  */
