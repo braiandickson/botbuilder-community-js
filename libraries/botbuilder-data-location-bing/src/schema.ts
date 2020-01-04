@@ -18,7 +18,8 @@ export enum FORMAT {
 
 export enum SEARCHTYPE {
     ONELINEADDRESS = 0,
-    ADDRESS = 1
+    ADDRESS = 1,
+    COORDINATES = 2
 }
 
 export interface SingleLineAddress {
@@ -31,9 +32,4 @@ export interface Address {
     locality?: string;
     postalCode?: string;
     addressLine?: string;
-}
-
-export interface Coordinates {
-    x: number;
-    y: number;
 }

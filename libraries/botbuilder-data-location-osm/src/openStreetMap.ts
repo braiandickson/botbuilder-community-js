@@ -65,6 +65,6 @@ export class OpenStreetMap {
         return await this.getLocationData(SEARCHTYPE.ADDRESS, parts);
     }
     public async bySingleLineAddress(address: SingleLineAddress): Promise<AddressMatch> {
-        return await this.getLocationData(SEARCHTYPE.ADDRESS, address);
+        return await this.getLocationData(SEARCHTYPE.ONELINEADDRESS, address);
     }
 }
