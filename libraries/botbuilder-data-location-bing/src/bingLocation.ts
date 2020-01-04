@@ -31,3 +31,16 @@ query={locationQuery}
 &maxResults={maxResults}
 &key={BingMapsAPIKey}
 */
+
+/*
+countryRegion={countryRegion}
+&adminDistrict={adminDistrict}
+&locality={locality}
+&postalCode={postalCode}
+&addressLine={addressLine}
+&userLocation={userLocation}
+&userIp={userIp}
+&usermapView={usermapView}
+&includeNeighborhood={includeNeighborhood}
+&maxResults={maxResults}&key={BingMapsKey}
+*/
