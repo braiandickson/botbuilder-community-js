@@ -23,9 +23,10 @@ describe('Tests for Bing Location data', () => {
     it('should return location match by address', async () => {
         const loc = new bing.BingLocation(settings);
         const result = await loc.byAddress({
-                addressLine: '',
-                adminDistrict: '',
-                countryRegion: '',
+                addressLine: 'Tower of London',
+                adminDistrict: 'England',
+                adminDistrict2: 'London',
+                countryRegion: 'United Kingdom',
                 postalCode: ''
             });
         assert.equal(result.matchedAddress, '');
