@@ -54,8 +54,8 @@ export class BingLocation {
         };
         const res: request.RequestPromise = await request(opts);
         const data: any = JSON.parse(res.body as string);
-        if(data != null && data.length > 0) {
-            return this.parseAddressMatch(data[0]);
+        if(data != null) {
+            return this.parseAddressMatch(data);
         }
         return null;
     }
