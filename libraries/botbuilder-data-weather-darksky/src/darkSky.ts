@@ -96,14 +96,16 @@ export class DarkSkyForecast {
     }
     public hottest(timeframe: TIMEFRAME = TIMEFRAME.DAILY): FutureWeatherForecast {
         const fore = this.getTimeframeForecast(timeframe);
-        const high: number = Math.max(...fore.data.map((e: IDarkSkyData): number => e.temperatureHigh));
-        const result: IDarkSkyData = fore.data.find((e: IDarkSkyData): boolean => e.temperatureHigh === high);
+        const prop = (timeframe === TIMEFRAME.DAILY) ? 'temperatureHigh' : 'temperature';
+        const high: number = Math.max(...fore.data.map((e: IDarkSkyData): number => e[prop]));
+        const result: IDarkSkyData = fore.data.find((e: IDarkSkyData): boolean => e[prop] === high);
         return this.getFutureWeatherForecast(result);
     }
     public coldest(timeframe: TIMEFRAME = TIMEFRAME.DAILY): FutureWeatherForecast {
         const fore = this.getTimeframeForecast(timeframe);
-        const low: number = Math.min(...fore.data.map((e: IDarkSkyData): number => e.temperatureLow));
-        const result: IDarkSkyData = fore.data.find((e: IDarkSkyData): boolean => e.temperatureLow === low);
+        const prop = (timeframe === TIMEFRAME.DAILY) ? 'temperatureLow' : 'temperature';
+        const low: number = Math.min(...fore.data.map((e: IDarkSkyData): number => e[prop]));
+        const result: IDarkSkyData = fore.data.find((e: IDarkSkyData): boolean => e[prop] === low);
         return this.getFutureWeatherForecast(result);
     }
     public wettest(timeframe: TIMEFRAME = TIMEFRAME.DAILY): FutureWeatherForecast {
@@ -203,7 +205,7 @@ async function getDarkSkyForecast(latitude: number, longitude: number, settings:
         resolveWithFullResponse: true
     };
     const res = await request(opts);
-    const data: IDarkSkyForecast = res.body;
+    const data: IDarkSkyForecast = JSON.parse(res.body);
     return new DarkSkyForecast(data);
 }
 
