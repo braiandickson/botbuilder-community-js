@@ -32,7 +32,7 @@ export class DarkSkyForecast {
     private getFutureWeatherForecast(data: IDarkSkyData): FutureWeatherForecast {
         if(data != null) {
             return {
-                date: spacetime(data.time).d,
+                date: spacetime(data.time * 1000).d,
                 weather: {
                     summary: data.summary,
                     temperatureHigh: data.temperatureHigh,

@@ -20,6 +20,28 @@ async function init() {
 
     const hourlyCold = forecast.coldest('hourly');
     console.log(hourlyCold);
+
+    const minutelyWettest = forecast.wettest('minutely');
+    console.log(minutelyWettest);
+
+    const currentSummary = forecast.getCurrentSummary();
+    console.log(currentSummary);
+
+    const todaysSummary = forecast.getTodaysSummary();
+    console.log(todaysSummary);
+
+    const currentForecast = forecast.getCurrentForecast();
+    console.log(currentForecast);
+
+    const todaysForecast = forecast.getTodaysForecast();
+    console.log(todaysForecast);
+
+    const alert = forecast.getAlert();
+    console.log(alert);
+
+    const alerts = forecast.getAlerts();
+    console.log(alerts);
+
 }
 
 init();
