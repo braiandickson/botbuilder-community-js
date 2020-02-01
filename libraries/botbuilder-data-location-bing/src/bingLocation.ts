@@ -15,7 +15,6 @@ export class BingLocation {
         if(data != null && data.resourceSets !== undefined && data.resourceSets[0].resources !== undefined) {
             const resc: any = data.resourceSets[0].resources[0];
             const coord: number[] = resc.point.coordinates;
-            console.warn('No street addresses incorporated.');
             return {
                 matchedAddress: resc.name,
                 coordinates: {
@@ -27,8 +26,8 @@ export class BingLocation {
                     streetName: null,
                     town: resc.address.neighborhood,
                     city: resc.address.locality,
-                    county: resc.address.adminDistrict,
-                    state: resc.address.adminDistrict2,
+                    county: resc.address.adminDistrict2,
+                    state: resc.address.adminDistrict1,
                     zip: resc.address.postalCode,
                     country: resc.address.countryRegion
                 },
@@ -44,7 +43,7 @@ export class BingLocation {
     private async getLocationData(searchType: SEARCHTYPE, params: any): Promise<any> {
         const p: any = { ...this.settings, ...{ o: FORMAT.JSON }, ...params};
         const url = (searchType === SEARCHTYPE.COORDINATES)
-            ? `https://dev.virtualearth.net/REST/v1/Locations/${ p }`
+            ? `https://dev.virtualearth.net/REST/v1/Locations/${ params.x },${ params.y }?${ stringify(p) }`
             : `https://dev.virtualearth.net/REST/v1/Locations?${ stringify(p) }`;
 
         const opts = {
@@ -63,9 +62,9 @@ export class BingLocation {
         return await this.getLocationData(SEARCHTYPE.ADDRESS, parts);
     }
     public async bySingleLineAddress(address: SingleLineAddress): Promise<any> {
-        return await this.getLocationData(SEARCHTYPE.ONELINEADDRESS, address);
+        return await this.getLocationData(SEARCHTYPE.ONELINEADDRESS, { query: address });
     }
-    public async byCoordinates(coordinates: string): Promise<any> {
-        return await this.getLocationData(SEARCHTYPE.COORDINATES, coordinates);
+    public async byCoordinates(x: number, y: number): Promise<any> {
+        return await this.getLocationData(SEARCHTYPE.COORDINATES, { x: x, y: y });
     }
 }

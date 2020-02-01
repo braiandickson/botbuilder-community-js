@@ -33,12 +33,12 @@ describe('Tests for Bing Location data', () => {
     });
     it('should return location match by one line address', async () => {
         const loc = new bing.BingLocation(settings);
-        const result = await loc.bySingleLineAddress('');
+        const result = await loc.bySingleLineAddress('Tower of London, United Kingdom');
         assert.equal(result.matchedAddress, 'Tower of London, United Kingdom');
     });
     it('should return location match by coordinates', async () => {
         const loc = new bing.BingLocation(settings);
-        const result = await loc.byCoordinates('51.509521484375,-0.0763700008392334');
+        const result = await loc.byCoordinates('51.509521484375, -0.0763700008392334');
         assert.equal(result.matchedAddress, 'Tower of London, United Kingdom');
     });
 
