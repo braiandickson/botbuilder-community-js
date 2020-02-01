@@ -37,10 +37,7 @@ describe('Tests for US Census data', () => {
     });
     it('should return location match by coordinates', async () => {
         const loc = new census.USCensusLocation(settings);
-        const result = await loc.byCoordinates({
-                x: -76.92691,
-                y: 38.846542
-            });
+        const result = await loc.byCoordinates(-76.92691, 38.846542);
         assert.equal(result.matchedAddress, '4600 Silver Hill Rd, SUITLAND, MD, 20746');
     });
 

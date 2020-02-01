@@ -21,24 +21,29 @@ export class USCensusLocation {
     }
     private async getLocationData(searchType: SEARCHTYPE, params: SingleLineAddress | Address | Coordinates): Promise<AddressMatch> {
         const opts = {
-            uri: `https://geocoding.geo.census.gov/geocoder/${ this.returnType }/${ searchType }?${ stringify(params) }`,
+            uri: `https://geocoding.geo.census.gov/geocoder/${ this.returnType }/${ searchType }?${ stringify({ ...this.settings, ...params }) }`,
             method: 'GET',
             resolveWithFullResponse: true
         };
         const res: request.RequestPromise = await request(opts);
         const data: any = JSON.parse(res.body as string);
-        if(data != null && data.result != null && data.result.addressMatches != null) {
-            return data.result.addressMatches[0];
+        if(data != null && data.result != null) {
+            if(data.result.addressMatches != null) {
+                return data.result.addressMatches[0];
+            }
+            if(data.result.geographies != null) {
+                return data.result.geographies;
+            }
         }
         return null;
     }
     public async byAddress(parts: Address): Promise<AddressMatch> {
         return await this.getLocationData(SEARCHTYPE.ADDRESS, parts);
     }
-    public async bySingleLineAddress(address: SingleLineAddress): Promise<AddressMatch> {
-        return await this.getLocationData(SEARCHTYPE.ONELINEADDRESS, address);
+    public async bySingleLineAddress(address: string): Promise<AddressMatch> {
+        return await this.getLocationData(SEARCHTYPE.ONELINEADDRESS, { address: address });
     }
-    public async byCoordinates(coordinates: Coordinates): Promise<AddressMatch> {
-        return await this.getLocationData(SEARCHTYPE.COORDINATES, coordinates);
+    public async byCoordinates(x: number, y: number): Promise<AddressMatch> {
+        return await this.getLocationData(SEARCHTYPE.COORDINATES, { x: x, y: y });
     }
 }

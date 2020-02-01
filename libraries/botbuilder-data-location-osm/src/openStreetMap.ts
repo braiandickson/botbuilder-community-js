@@ -52,7 +52,10 @@ export class OpenStreetMap {
         const opts = {
             uri: `https://nominatim.openstreetmap.org/search?${ stringify(params) }`,
             method: 'GET',
-            resolveWithFullResponse: true
+            resolveWithFullResponse: true,
+            headers: {
+                'User-Agent': `${ this.settings.application } Request-Promise OSM Bot Builder Community Data Package`
+            }
         };
         const res: request.RequestPromise = await request(opts);
         const data: any = JSON.parse(res.body as string);
@@ -64,7 +67,7 @@ export class OpenStreetMap {
     public async byAddress(parts: Address): Promise<AddressMatch> {
         return await this.getLocationData(SEARCHTYPE.ADDRESS, parts);
     }
-    public async bySingleLineAddress(address: SingleLineAddress): Promise<AddressMatch> {
-        return await this.getLocationData(SEARCHTYPE.ONELINEADDRESS, address);
+    public async bySingleLineAddress(address: string): Promise<AddressMatch> {
+        return await this.getLocationData(SEARCHTYPE.ONELINEADDRESS, { q: address });
     }
 }

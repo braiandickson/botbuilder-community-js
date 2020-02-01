@@ -3,6 +3,7 @@
  */
 
 export interface OSMSettings {
+    application: string;
     addressdetails?: number;
     extratags?: number;
     namedetails?: number;
