@@ -84,7 +84,7 @@ async function osmLookup() {
 async function init() {
     await bingLookup();
     await uscLookup();
-    //await osmLookup();
+    await osmLookup();
 }
 
 init();
