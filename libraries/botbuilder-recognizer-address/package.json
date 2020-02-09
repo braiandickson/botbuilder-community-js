@@ -1,7 +1,7 @@
 {
-  "name": "@botbuildercommunity/recognizer-location",
+  "name": "@botbuildercommunity/recognizer-address",
   "version": "1.0.0",
-  "description": "Bot Builder Community package for recognizing locations in text.",
+  "description": "Bot Builder Community package for recognizing address in text.",
   "main": "./lib/index.js",
   "typings": "index.d.ts",
   "directories": {
