@@ -26,6 +26,7 @@ The following alternative storage implementations are currently available;
 | Name | Description | Sample? | NPM |
 | ---- | ----------- | ------- | --- |
 | [Azure Table storage](libraries/botbuilder-storage-azure-table/README.md) | Use Azure Table Storage in your bot. | | ![NPM Version](https://img.shields.io/npm/v/@botbuildercommunity/storage-azure-table.svg) |
+| [DynamoDB storage](libraries/botbuilder-storage-dynamodb/README.md) | Use DynamoDB storage implementation in your bot. | | ![NPM Version](https://img.shields.io/npm/v/@botbuildercommunity/storage-dynamodb.svg) |
 | [MongoDB storage](libraries/botbuilder-storage-mongodb/README.md) | Use MongoDB storage implementation in your bot. | | ![NPM Version](https://img.shields.io/npm/v/@botbuildercommunity/storage-mongodb.svg) |
 | [MS SQL storage](libraries/botbuilder-storage-mssql/README.md) | Use Microsoft SQL Server storage implementation in your bot. | [Sample](https://github.com/BotBuilderCommunity/botbuilder-community-js/tree/master/samples/storage-mssql) | ![NPM Version](https://img.shields.io/npm/v/@botbuildercommunity/storage-mssql.svg) |
 
@@ -70,6 +71,6 @@ The following packages are available from [Botkit](https://github.com/howdyai/bo
 | ---- | ----------- | ------- |
 | [botbuilder-adapter-facebook](https://github.com/howdyai/botkit/tree/master/packages/botbuilder-adapter-facebook#readme) | A platform adapter for Facebook Messenger | ![NPM Version](https://img.shields.io/npm/v/botbuilder-adapter-facebook.svg)
 | [botbuilder-adapter-hangouts](https://github.com/howdyai/botkit/tree/master/packages/botbuilder-adapter-hangouts#readme) | A platform adapter for Google | ![NPM Version](https://img.shields.io/npm/v/botbuilder-adapter-hangouts.svg)
-| [botbuilder-adapter-slack](https://github.com/howdyai/botkit/tree/master/packages/botbuilder-adapter-slack#readme) | A platform adapter for Slack | ![NPM Version](https://img.shields.io/npm/v/botbuilder-adapter-slack.svg)
+| [botbuilder-adapter-slack](https://github.com/howdyai/botkit/tree/main/packages/botbuilder-adapter-slack#readme) | A platform adapter for Slack | ![NPM Version](https://img.shields.io/npm/v/botbuilder-adapter-slack.svg)
 | [botbuilder-adapter-twilio-sms](https://github.com/howdyai/botkit/tree/master/packages/botbuilder-adapter-twilio-sms#readme) | A platform adapter for Twilio SMS | ![NPM Version](https://img.shields.io/npm/v/botbuilder-adapter-twilio-sms.svg)
 | [botbuilder-adapter-webex](https://github.com/howdyai/botkit/tree/master/packages/botbuilder-adapter-webex#readme) | A platform adapter for Webex Teams| ![NPM Version](https://img.shields.io/npm/v/botbuilder-adapter-webex.svg)
