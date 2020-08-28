@@ -32,7 +32,7 @@ export class TwitterWebhookManager {
         }
         else if(request.url !== undefined) {
             try {
-                const parsed = parse(request.url.split('?')[1]);
+                const parsed: any = parse(request.url.split('?')[1]);
                 token = parsed.crc_token;
             }
             catch(e) {
